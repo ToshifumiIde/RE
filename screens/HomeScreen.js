@@ -3,6 +3,8 @@ import { StyleSheet, FlatList, SafeAreaView } from "react-native";
 import ListItem from "../components/ListItem";
 import Constants from "expo-constants";
 import axios from "axios";
+import Loading from "../components/Loading";
+
 
 const URL = `http://newsapi.org/v2/top-headlines?country=jp&apiKey=${Constants.manifest.extra.newsApiKey}`;
 
@@ -39,18 +41,21 @@ const styles = StyleSheet.create({
 
 export default HomeScreen = ({ navigation }) => {
   const [articles, setArticles] = useState([]);
+  const [loading , setLoading ] = useState(false);
 
   useEffect(() => {
     fetchArticles();
   }, []);
 
   const fetchArticles = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(URL);
       setArticles(response.data.articles);
       // console.log(response);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -68,6 +73,7 @@ export default HomeScreen = ({ navigation }) => {
           )}
           keyExtractor={(item, index) => index.toString()}
       />
+      {loading && <Loading />}
     </SafeAreaView>
   );
 };

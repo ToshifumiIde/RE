@@ -1,4 +1,4 @@
-import React from "react";//reactパッケージのインストール
+import React , {useState} from "react";//reactパッケージのインストール
 import { StyleSheet, SafeAreaView, Text ,TouchableOpacity } from "react-native";//
 //ニュースの記事を表示するためのコンポーネント
 import { WebView } from "react-native-webview";
@@ -6,6 +6,7 @@ import { useDispatch , useSelector } from "react-redux";
 // import { ADD_CLIP } from "../store/actions/action";
 import { addClip , deleteClip } from "../store/actions/user";
 import ClipButton from "../components/ClipButton";
+import Loading from "../components/Loading";
 
 const styles = StyleSheet.create({
   container: {
@@ -15,6 +16,14 @@ const styles = StyleSheet.create({
 });
 
 export default ArticleScreen = ({route}) => {
+  const [url , setUrl] =useState();
+  const [ loading , setLoading ] = useState(false);
+
+  useEffect(()=>{
+    const article = props.navigation.getParam("article");
+    setUrl(article.url);
+  },[]);
+
   const {article} = route.params;
 
   const dispatch = useDispatch();
@@ -38,7 +47,11 @@ export default ArticleScreen = ({route}) => {
 
     <SafeAreaView style={styles.container}>
       <ClipButton onPress={toggleClip} enabled={isClipped()} />
-    <WebView source={{uri:article.url}} />
+    <WebView 
+      source={{uri:url}}
+      startInLoadingState={true}
+      renderLoading={()=><Loading />}
+      />
     </SafeAreaView>
   );
 };
