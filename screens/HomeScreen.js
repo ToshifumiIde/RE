@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, FlatList, SafeAreaView } from "react-native";
 import ListItem from "../components/ListItem";
+import Loading from "../components/Loading";
 import Constants from "expo-constants";
 import axios from "axios";
-import Loading from "../components/Loading";
-
 
 const URL = `http://newsapi.org/v2/top-headlines?country=jp&apiKey=${Constants.manifest.extra.newsApiKey}`;
 
@@ -55,8 +54,8 @@ export default HomeScreen = ({ navigation }) => {
       // console.log(response);
     } catch (error) {
       console.log(error);
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   return (

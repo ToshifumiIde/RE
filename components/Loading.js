@@ -3,7 +3,7 @@ import {View , StyleSheet , ActivityIndicator } from "react-native";
 
 const styles = StyleSheet.create({
   container:{
-    position:absolute,
+    position:"absolute",
     top:0,
     left:0,
     width:"100%",
@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
     alignItems:"center",
     justifyContent:"center",
   }
-
 });
 
 const Loading = ()=> {
@@ -21,3 +20,5 @@ const Loading = ()=> {
       <ActivityIndicator size="large" />
     </View>
   )};
+
+export default Loading;

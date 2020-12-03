@@ -1,9 +1,7 @@
-import React , {useState} from "react";//reactパッケージのインストール
-import { StyleSheet, SafeAreaView, Text ,TouchableOpacity } from "react-native";//
-//ニュースの記事を表示するためのコンポーネント
-import { WebView } from "react-native-webview";
+import React , {useState , useEffect} from "react";//reactパッケージのインストール
+import { StyleSheet, SafeAreaView} from "react-native";//
+import  WebView  from "react-native-webview";//ニュース記事表示のコンポーネント
 import { useDispatch , useSelector } from "react-redux";
-// import { ADD_CLIP } from "../store/actions/action";
 import { addClip , deleteClip } from "../store/actions/user";
 import ClipButton from "../components/ClipButton";
 import Loading from "../components/Loading";
@@ -32,7 +30,7 @@ export default ArticleScreen = ({route}) => {
   const {clips} = user;
 
   const isClipped = () => {
-    return clips.some(clip =>clip.url === article.url)
+    return clips.some(clip => clip.url === article.url)
   }
 
   const toggleClip = () => {
@@ -44,14 +42,22 @@ export default ArticleScreen = ({route}) => {
   }
 
   return (
-
     <SafeAreaView style={styles.container}>
       <ClipButton onPress={toggleClip} enabled={isClipped()} />
     <WebView 
-      source={{uri:url}}
+      source={{ uri:url }}
       startInLoadingState={true}
-      renderLoading={()=><Loading />}
+      renderLoading={()=> {
+          <Loading />
+        }}
       />
     </SafeAreaView>
   );
 };
+
+const mapStateToProps = state =>{
+  return {
+    user:state.user,
+  };
+}
+const mapDispatchToProps = {addClip , deleteClip};
