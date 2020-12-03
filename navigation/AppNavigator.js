@@ -25,7 +25,7 @@ const HomeStack = ()=> {
   );
 };
 
-const ClipStack = ()=>{
+const ClipStack = ()=> {
   return(
     <Stack.Navigator>
       <Stack.Screen 
@@ -57,8 +57,14 @@ export default AppNavigator = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator screenOptions={screenOption}>
-        <Tab.Screen name="Home" component={HomeStack} />
-        <Tab.Screen name="Clip" component={ClipStack} />
+        <Tab.Screen 
+          name="Home"
+          component={HomeStack} 
+        />
+        <Tab.Screen 
+          name="Clip" 
+          component={ClipStack}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );

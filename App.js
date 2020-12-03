@@ -4,11 +4,6 @@ import { Provider } from "react-redux";//store提供に必要。<Provider>で囲
 import store , {persistor} from "./store";
 import {PersistGate} from "redux-persist/integration/react";
 
-
-//reduxを永続化して、端末（スマホのストレージ）に保存する
-//redux-persist
-
-
 export default function App() {
   return (
   <Provider store={store}>
@@ -18,6 +13,10 @@ export default function App() {
   </Provider>
   );
 }
+
+
+
+
 
 //アロー関数の記載方法に修正
 // const App = () => {
